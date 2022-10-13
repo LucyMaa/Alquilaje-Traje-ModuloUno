@@ -9,19 +9,30 @@ import javax.swing.JOptionPane;
  * @author Matias
  */
 public class DDetallePrenda {
+
+    /**
+     * Esta es una clase intermedia de capa de datos para Detalle Prenda en
+     * java..
+     *
+     * @param
+     */
     private int id_vestimentas;
     private int id_prenda;
     private int stock;
     private String color;
-    
+
     private Connection con;
-    
+
     public DDetallePrenda() {
         Conexion conn = new Conexion();
         con = conn.conectar();
     }
-    
-    public boolean crear(){
+
+    public boolean crear() {
+        /**
+         * Este es el método booleano crear un detalle de prenda que es muy importante
+         * para agregar un detalle de prenda a la aplicacion.
+         */
         String query = "insert into detalle_prenda values(?,?,?,?)";
         try {
             PreparedStatement pre = con.prepareStatement(query);
@@ -33,12 +44,16 @@ public class DDetallePrenda {
             pre.close();
             return true;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al insertar db "+e,"Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al insertar db " + e, "Error", JOptionPane.ERROR_MESSAGE);
         }
         return false;
     }
-    
-    public boolean eliminar(){
+
+    public boolean eliminar() {
+        /**
+         * Este es el método booleano eliminar un detalle de prenda que es muy importante
+         * para eliminar un detalle de prenda existente a la aplicacion.
+         */
         String query = "delete from detalle_prenda where id_vestimenta = ? and id_prenda = ? and stock = ? and color = ?";
         try {
             PreparedStatement pre = con.prepareStatement(query);
@@ -50,23 +65,27 @@ public class DDetallePrenda {
             pre.close();
             return true;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al insertar db "+e,"Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al insertar db " + e, "Error", JOptionPane.ERROR_MESSAGE);
         }
         return false;
     }
-    
-    public ArrayList<Object[]> listar(){
+
+    public ArrayList<Object[]> listar() {
+        /**
+         * Este es el arreglo para poder listar los detalles de prenda que es muy
+         * importante para mostrar los detalles de prendas existentes en la aplicacion.
+         */
         ArrayList<Object[]> detalleprenda = new ArrayList<>();
         String query = "select detalle_prenda.id_prenda, prendas.nombre, detalle_prenda.stock, detalle_prenda.color from prendas, detalle_prenda where prendas.id = detalle_prenda.id_prenda and detalle_prenda.id_vestimenta = ? order by id ASC";
         try {
             PreparedStatement pre = con.prepareStatement(query);
             pre.setInt(1, this.id_vestimentas);
             ResultSet result = pre.executeQuery();
-            while(result.next()){
-                detalleprenda.add(new Object[]{result.getInt(1)+"-"+result.getString(2),result.getInt(3),result.getString(4)});
+            while (result.next()) {
+                detalleprenda.add(new Object[]{result.getInt(1) + "-" + result.getString(2), result.getInt(3), result.getString(4)});
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al listar "+e,"Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al listar " + e, "Error", JOptionPane.ERROR_MESSAGE);
             return null;
         }
         return detalleprenda;
@@ -103,5 +122,5 @@ public class DDetallePrenda {
     public void setColor(String color) {
         this.color = color;
     }
-    
+
 }

@@ -10,6 +10,12 @@ import javax.swing.JOptionPane;
  */
 public class DCliente {
 
+    /**
+     * Esta es una clase de capa de datos para Cliente en java..
+     *
+     * @param
+     */
+
     private int id;
     private String nombre;
     private String ci;
@@ -26,7 +32,11 @@ public class DCliente {
     }
 
     public boolean crear() {
-        String query = "insert into clientes (nombre,ci,telefono,fecha_nacimiento,sexo,direccion) values(?,?,?,'"+this.fecha_nacimiento+"'," + this.sexo + ",?)";
+        /**
+         * Este es el método booleano crear un cliente que es muy importante
+         * para agregar una nuevo cliente a la aplicacion.
+         */
+        String query = "insert into clientes (nombre,ci,telefono,fecha_nacimiento,sexo,direccion) values(?,?,?,'" + this.fecha_nacimiento + "'," + this.sexo + ",?)";
         try {
             PreparedStatement pre = con.prepareStatement(query);
             pre.setString(1, this.nombre);
@@ -43,6 +53,10 @@ public class DCliente {
     }
 
     public ArrayList<Object[]> listar() {
+        /**
+         * Este es el arreglo para poder listar los clientes que es muy
+         * importante para mostrar los clientes existentes en la aplicacion.
+         */
         ArrayList<Object[]> clientes = new ArrayList<>();
         String query = "select * from clientes order by id ASC";
         try {
@@ -60,7 +74,11 @@ public class DCliente {
     }
 
     public boolean editar() {
-        String query = "update clientes set nombre = ?, ci = ?, telefono = ?, fecha_nacimiento = '"+this.fecha_nacimiento+"', sexo = " + this.sexo + ", direccion = ? where id = ? ";
+        /**
+         * Este es el método booleano editar un cliente que es muy importante
+         * para modificar un cliente existente en la aplicacion.
+         */
+        String query = "update clientes set nombre = ?, ci = ?, telefono = ?, fecha_nacimiento = '" + this.fecha_nacimiento + "', sexo = " + this.sexo + ", direccion = ? where id = ? ";
         try {
             PreparedStatement pre = con.prepareStatement(query);
             pre.setString(1, this.nombre);
@@ -78,6 +96,10 @@ public class DCliente {
     }
 
     public boolean eliminar() {
+        /**
+         * Este es el método booleano eliminar un cliente que es muy importante
+         * para eliminar un cliente existente a la aplicacion.
+         */
         String query = "delete from clientes where id = ?";
         try {
             PreparedStatement pre = con.prepareStatement(query);
@@ -114,7 +136,7 @@ public class DCliente {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-    
+
     public String getFecha_nacimiento() {
         return fecha_nacimiento;
     }
@@ -147,5 +169,4 @@ public class DCliente {
         this.sexo = sexo;
     }
 
-    
 }

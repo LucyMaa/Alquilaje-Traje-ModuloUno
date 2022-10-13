@@ -11,13 +11,19 @@ import javax.swing.JOptionPane;
  * @author Matias
  */
 public class DVestimenta {
+
+    /**
+     * Esta es una clase de capa de datos para Vestimenta en java..
+     *
+     * @param
+     */
     private int id;
     private String nombre;
     private int cantidad;
     private int precio;
     private int id_empleado;
     private int id_categoria;
-    
+
     private Connection con;
 
     public DVestimenta() {
@@ -25,7 +31,11 @@ public class DVestimenta {
         con = conn.conectar();
     }
 
-    public int crear(){
+    public int crear() {
+        /**
+         * Este es el método booleano crear una vestimenta que es muy importante
+         * para agregar una nueva vestimenta a la aplicacion.
+         */
         String query = "insert into vestimentas (nombre,cantidad,precio,id_empleado,id_categoria) values(?,?,?,?,?)";
         String query2 = "select id from vestimentas order by id DESC limit 1";
         try {
@@ -36,7 +46,7 @@ public class DVestimenta {
             pre.setInt(4, this.id_empleado);
             pre.setInt(5, this.id_categoria);
             pre.execute();
-            
+
             pre = con.prepareStatement(query2);
             ResultSet result = pre.executeQuery();
             result.next();
@@ -44,28 +54,36 @@ public class DVestimenta {
             pre.close();
             return id_vestimenta;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al insertar db "+e,"Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al insertar db " + e, "Error", JOptionPane.ERROR_MESSAGE);
         }
         return 0;
     }
-    
-    public ArrayList listar(){
+
+    public ArrayList listar() {
+        /**
+         * Este es el arreglo para poder listar las vestimentas que es muy
+         * importante para mostrar las vestimentas existentes en la aplicacion.
+         */
         ArrayList<Object[]> vestimentas = new ArrayList<>();
         String query = "select vestimentas.id,vestimentas.nombre, vestimentas.cantidad,vestimentas.precio,vestimentas.id_empleado,empleados.nombre, vestimentas.id_categoria, categorias.nombre from vestimentas,categorias,empleados where id_empleado = empleados.id and id_categoria = categorias.id  order by id ASC";
         try {
             PreparedStatement pre = con.prepareStatement(query);
             ResultSet result = pre.executeQuery();
-            while(result.next()){
-                vestimentas.add(new Object[]{result.getInt(1),result.getString(2),result.getInt(3),result.getInt(4),result.getInt(5)+"-"+result.getString(6),result.getInt(7)+"-"+result.getString(8)});
+            while (result.next()) {
+                vestimentas.add(new Object[]{result.getInt(1), result.getString(2), result.getInt(3), result.getInt(4), result.getInt(5) + "-" + result.getString(6), result.getInt(7) + "-" + result.getString(8)});
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al listar "+e,"Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al listar " + e, "Error", JOptionPane.ERROR_MESSAGE);
             return null;
         }
         return vestimentas;
     }
-    
-    public boolean editar(){
+
+    public boolean editar() {
+        /**
+         * Este es el método booleano editar una vestimenta que es muy
+         * importante para modificar una vestimenta existente en la aplicacion.
+         */
         String query = "update vestimentas set nombre = ?, cantidad = ?, precio = ?, id_empleado = ?, id_categoria = ? where id = ? ";
         try {
             PreparedStatement pre = con.prepareStatement(query);
@@ -79,12 +97,16 @@ public class DVestimenta {
             pre.close();
             return true;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al editar "+e,"Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al editar " + e, "Error", JOptionPane.ERROR_MESSAGE);
         }
         return false;
     }
-    
-    public boolean eliminar(){
+
+    public boolean eliminar() {
+        /**
+         * Este es el método booleano eliminar una vestimenta que es muy
+         * importante para eliminar una vestimenta existente en la aplicacion.
+         */
         String query = "delete from vestimentas where id = ?";
         try {
             PreparedStatement pre = con.prepareStatement(query);
@@ -93,11 +115,11 @@ public class DVestimenta {
             pre.close();
             return true;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al eliminar "+e,"Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al eliminar " + e, "Error", JOptionPane.ERROR_MESSAGE);
         }
         return false;
     }
-    
+
     public int getId() {
         return id;
     }
@@ -145,6 +167,5 @@ public class DVestimenta {
     public void setId_categoria(int id_categoria) {
         this.id_categoria = id_categoria;
     }
-    
-    
+
 }

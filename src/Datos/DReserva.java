@@ -1,4 +1,5 @@
 package Datos;
+
 import java.sql.*;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -8,15 +9,21 @@ import javax.swing.JOptionPane;
  * @author Matias
  */
 public class DReserva {
+
+    /**
+     * Esta es una clase de capa de datos para Reserva en java..
+     *
+     * @param
+     */
     private int id;
     private String titulo;
     private String garantia;
     private String fechaInicio;
     private String fechaFin;
     private boolean estado;
-    
+
     private int id_cliente;
-    
+
     private Connection con;
 
     public DReserva() {
@@ -24,8 +31,12 @@ public class DReserva {
         con = conn.conectar();
     }
 
-    public int crear(){
-        String query = "insert into reservas (id_cliente,titulo,garantia,fecha_inicio,fecha_fin,estado) values(?,?,?,'"+this.fechaInicio+"','"+this.fechaFin+"',?)";
+    public int crear() {
+        /**
+         * Este es el método booleano crear una reserva que es muy importante
+         * para agregar una nueva reserva a la aplicacion.
+         */
+        String query = "insert into reservas (id_cliente,titulo,garantia,fecha_inicio,fecha_fin,estado) values(?,?,?,'" + this.fechaInicio + "','" + this.fechaFin + "',?)";
         String query2 = "select id from reservas order by id DESC limit 1";
         try {
             PreparedStatement pre = con.prepareStatement(query);
@@ -34,7 +45,7 @@ public class DReserva {
             pre.setString(3, this.garantia);
             pre.setBoolean(4, this.estado);
             pre.execute();
-            
+
             pre = con.prepareStatement(query2);
             ResultSet result = pre.executeQuery();
             result.next();
@@ -42,29 +53,37 @@ public class DReserva {
             pre.close();
             return id_reserva;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al insertar db "+e,"Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al insertar db " + e, "Error", JOptionPane.ERROR_MESSAGE);
         }
         return 0;
     }
-    
-    public ArrayList listar(){
+
+    public ArrayList listar() {
+        /**
+         * Este es el arreglo para poder listar las reservas que es muy
+         * importante para mostrar las reservas existentes en la aplicacion.
+         */
         ArrayList<Object[]> vestimentas = new ArrayList<>();
         String query = "select reservas.id,reservas.id_cliente, clientes.nombre, reservas.titulo, reservas.garantia, reservas.fecha_inicio, reservas.fecha_fin,reservas.estado from clientes,reservas where clientes.id = reservas.id_cliente order by id ASC";
         try {
             PreparedStatement pre = con.prepareStatement(query);
             ResultSet result = pre.executeQuery();
-            while(result.next()){
-                vestimentas.add(new Object[]{result.getInt(1),result.getInt(2)+"-"+result.getString(3),result.getString(4),result.getString(5),result.getString(6),result.getString(7),result.getBoolean(8)});
+            while (result.next()) {
+                vestimentas.add(new Object[]{result.getInt(1), result.getInt(2) + "-" + result.getString(3), result.getString(4), result.getString(5), result.getString(6), result.getString(7), result.getBoolean(8)});
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al listar "+e,"Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al listar " + e, "Error", JOptionPane.ERROR_MESSAGE);
             return null;
         }
         return vestimentas;
     }
-    
-    public boolean editar(){
-        String query = "update reservas set titulo = ?, garantia = ?, fecha_inicio = '"+this.fechaInicio+"', fecha_fin = '"+this.fechaFin+"', estado = ?, id_cliente = ? where id = ? ";
+
+    public boolean editar() {
+        /**
+         * Este es el método booleano editar una reserva que es muy importante
+         * para modificar una reserva existente en la aplicacion.
+         */
+        String query = "update reservas set titulo = ?, garantia = ?, fecha_inicio = '" + this.fechaInicio + "', fecha_fin = '" + this.fechaFin + "', estado = ?, id_cliente = ? where id = ? ";
         try {
             PreparedStatement pre = con.prepareStatement(query);
             pre.setString(1, this.titulo);
@@ -76,12 +95,16 @@ public class DReserva {
             pre.close();
             return true;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al editar "+e,"Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al editar " + e, "Error", JOptionPane.ERROR_MESSAGE);
         }
         return false;
     }
-    
-    public boolean eliminar(){
+
+    public boolean eliminar() {
+        /**
+         * Este es el método booleano eliminar una reserva que es muy importante
+         * para eliminar una reserva existente en la aplicacion.
+         */
         String query = "delete from reservas where id = ?";
         try {
             PreparedStatement pre = con.prepareStatement(query);
@@ -90,7 +113,7 @@ public class DReserva {
             pre.close();
             return true;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al eliminar "+e,"Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al eliminar " + e, "Error", JOptionPane.ERROR_MESSAGE);
         }
         return false;
     }
@@ -150,6 +173,5 @@ public class DReserva {
     public void setId_cliente(int id_cliente) {
         this.id_cliente = id_cliente;
     }
-    
-    
+
 }

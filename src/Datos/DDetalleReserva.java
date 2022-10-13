@@ -1,24 +1,37 @@
 package Datos;
+
 import java.sql.*;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author Matias
  */
 public class DDetalleReserva {
+
+    /**
+     * Esta es una clase intermedia de capa de datos para Detalle de Reserva en
+     * java..
+     *
+     * @param
+     */
     private int id_reserva;
     private int id_vestimentas;
     private int cantidad;
-    
+
     private Connection con;
-    
+
     public DDetalleReserva() {
         Conexion conn = new Conexion();
         con = conn.conectar();
     }
-    
-    public boolean crear(){
+
+    public boolean crear() {
+        /**
+         * Este es el método booleano crear un detalle de reserva que es muy importante
+         * para agregar un detalle de reserva a la aplicacion.
+         */
         String query = "insert into detalle_reserva values(?,?,?)";
         try {
             PreparedStatement pre = con.prepareStatement(query);
@@ -29,12 +42,16 @@ public class DDetalleReserva {
             pre.close();
             return true;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al insertar db "+e,"Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al insertar db " + e, "Error", JOptionPane.ERROR_MESSAGE);
         }
         return false;
     }
-    
-    public boolean eliminar(){
+
+    public boolean eliminar() {
+        /**
+         * Este es el método booleano eliminar un detalle de reserva que es muy importante
+         * para eliminar un detalle de reserva existente a la aplicacion.
+         */
         String query = "delete from detalle_reserva where id_reserva = ? and id_vestimenta = ? and cantidad = ? ";
         try {
             PreparedStatement pre = con.prepareStatement(query);
@@ -45,23 +62,27 @@ public class DDetalleReserva {
             pre.close();
             return true;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al insertar db "+e,"Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al insertar db " + e, "Error", JOptionPane.ERROR_MESSAGE);
         }
         return false;
     }
-    
-    public ArrayList<Object[]> listar(){
+
+    public ArrayList<Object[]> listar() {
+        /**
+         * Este es el arreglo para poder listar los detalles de reserva que es muy
+         * importante para mostrar los detalles de reserva existentes en la aplicacion.
+         */
         ArrayList<Object[]> detalleprenda = new ArrayList<>();
         String query = "select detalle_reserva.id_vestimenta, vestimentas.nombre, detalle_reserva.cantidad from vestimentas, detalle_reserva where vestimentas.id = detalle_reserva.id_vestimenta and detalle_reserva.id_reserva = ?";
         try {
             PreparedStatement pre = con.prepareStatement(query);
             pre.setInt(1, this.id_reserva);
             ResultSet result = pre.executeQuery();
-            while(result.next()){
-                detalleprenda.add(new Object[]{result.getInt(1)+"-"+result.getString(2),result.getInt(3)});
+            while (result.next()) {
+                detalleprenda.add(new Object[]{result.getInt(1) + "-" + result.getString(2), result.getInt(3)});
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al listar "+e,"Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al listar " + e, "Error", JOptionPane.ERROR_MESSAGE);
             return null;
         }
         return detalleprenda;
@@ -90,6 +111,5 @@ public class DDetalleReserva {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
-    
-    
+
 }

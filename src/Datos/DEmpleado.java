@@ -11,6 +11,12 @@ import javax.swing.JOptionPane;
  * @author Matias
  */
 public class DEmpleado {
+
+    /**
+     * Esta es una clase de capa de datos para Empleados en java..
+     *
+     * @param
+     */
     private int id;
     private String nombre;
     private String ci;
@@ -24,9 +30,13 @@ public class DEmpleado {
         Conexion conn = new Conexion();
         con = conn.conectar();
     }
-    
+
     public boolean crear() {
-        String query = "insert into empleados (nombre,ci,telefono,fecha_nacimiento,sexo) values(?,?,?,'"+this.fecha_nacimiento+"'," + this.sexo + ")";
+        /**
+         * Este es el método booleano crear un empleado que es muy importante
+         * para agregar un nuevo empleado a la aplicacion.
+         */
+        String query = "insert into empleados (nombre,ci,telefono,fecha_nacimiento,sexo) values(?,?,?,'" + this.fecha_nacimiento + "'," + this.sexo + ")";
         try {
             PreparedStatement pre = con.prepareStatement(query);
             pre.setString(1, this.nombre);
@@ -42,6 +52,10 @@ public class DEmpleado {
     }
 
     public ArrayList<Object[]> listar() {
+        /**
+         * Este es el arreglo para poder listar los empleados que es muy
+         * importante para mostrar los empleados existentes en la aplicacion.
+         */
         ArrayList<Object[]> clientes = new ArrayList<>();
         String query = "select * from empleados order by id ASC";
         try {
@@ -59,7 +73,11 @@ public class DEmpleado {
     }
 
     public boolean editar() {
-        String query = "update empleados set nombre = ?, ci = ?, telefono = ?, fecha_nacimiento = '"+this.fecha_nacimiento+"', sexo = " + this.sexo + " where id = ? ";
+        /**
+         * Este es el método booleano editar un empleado que es muy
+         * importante para modificar un empleado existente en la aplicacion.
+         */
+        String query = "update empleados set nombre = ?, ci = ?, telefono = ?, fecha_nacimiento = '" + this.fecha_nacimiento + "', sexo = " + this.sexo + " where id = ? ";
         try {
             PreparedStatement pre = con.prepareStatement(query);
             pre.setString(1, this.nombre);
@@ -76,6 +94,10 @@ public class DEmpleado {
     }
 
     public boolean eliminar() {
+        /**
+         * Este es el método booleano eliminar un empleado que es muy
+         * importante para eliminar un empleado existente en la aplicacion.
+         */
         String query = "delete from empleados where id = ?";
         try {
             PreparedStatement pre = con.prepareStatement(query);
@@ -137,5 +159,4 @@ public class DEmpleado {
         this.sexo = sexo;
     }
 
-    
 }
