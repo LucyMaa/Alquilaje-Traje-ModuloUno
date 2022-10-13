@@ -13,26 +13,26 @@
 ## Diseño Conceptual
 ![Diseño Conceptual](/diagramas/Diseño_Conceptual.png)
 ## Diagrama de clase Dinámico
-1. __Gestionar Cliente__
+1. __CU: Gestionar Cliente__
 
 ![Gestionar Cliente](/diagramas/diagrama_dinamicos/CU_Gestionar_Cliente.png)
 
-2. __Gestionar Empleado__
+2. __CU:Gestionar Empleado__
 
 ![Gestionar Empleado](/diagramas/diagrama_dinamicos/CU_Gestionar_Empleado.png)
 
-3. __Gestionar Vestimenta__
+3. __CU:Gestionar Vestimenta__
 
 ![Gestionar Vestimenta](/diagramas/diagrama_dinamicos/CU_Gestionar_Vestimenta.png)
 
-4. __Gestionar Prenda__
+4. __CU:Gestionar Prenda__
 
 ![Gestionar Prenda](/diagramas/diagrama_dinamicos/CU_Gestionar_Prenda.png)
 
-5. __Gestionar Categoria__
+5. __CU:Gestionar Categoria__
 
 ![Gestionar Categoria](/diagramas/diagrama_dinamicos/CU_Gestionar_Categoria.png)
 
-6. __Gestionar Reserva__
+6. __CU:Gestionar Reserva__
 
 ![Gestionar Reserva](/diagramas/diagrama_dinamicos/CU_Gestionar_Reserva.png)
