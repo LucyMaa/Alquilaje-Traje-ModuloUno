@@ -19,9 +19,15 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Matias
+ * @author Liz
  */
 public class PReserva extends javax.swing.JFrame {
+    
+    /**
+     * Esta es una clase de capa de presentacion para Reserva en java..
+     *
+     * @param
+     */
 
     private int id;
     private String titulo;

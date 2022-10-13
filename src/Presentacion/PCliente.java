@@ -13,9 +13,14 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Matias
+ * @author Liz
  */
 public class PCliente extends javax.swing.JFrame {
+    /**
+     * Esta es una clase de capa de presentacion para Cliente en java..
+     *
+     * @param
+     */
     
     private int id;
     private String nombre;

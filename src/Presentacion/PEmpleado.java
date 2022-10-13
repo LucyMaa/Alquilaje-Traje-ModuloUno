@@ -14,9 +14,14 @@ import javax.swing.UIManager;
 
 /**
  *
- * @author Matias
+ * @author Liz
  */
 public class PEmpleado extends javax.swing.JFrame {
+    /**
+     * Esta es una clase de capa de presentacion para Empleado en java..
+     *
+     * @param
+     */
 
     private int id;
     private String nombre;

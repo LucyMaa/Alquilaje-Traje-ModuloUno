@@ -9,10 +9,15 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Matias
+ * @author Liz
  */
 public class PCategoria extends javax.swing.JFrame {
 
+    /**
+     * Esta es una clase de capa de presentacion para Categoria en java..
+     *
+     * @param
+     */
     private NCategoria ncategoria;
 
     private int id;
@@ -289,7 +294,7 @@ public class PCategoria extends javax.swing.JFrame {
          */
         try {
             UIManager.setLookAndFeel("com.jtattoo.plaf.luna.LunaLookAndFeel");
-            
+
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(PCategoria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {

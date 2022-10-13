@@ -8,9 +8,15 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Matias
+ * @author Liz
  */
 public class PPrenda extends javax.swing.JFrame {
+
+    /**
+     * Esta es una clase de capa de presentacion para Prenda en java..
+     *
+     * @param
+     */
 
     private int id;
     private String nombre;
@@ -321,7 +327,7 @@ public class PPrenda extends javax.swing.JFrame {
          */
         try {
             UIManager.setLookAndFeel("com.jtattoo.plaf.luna.LunaLookAndFeel");
-            
+
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(PPrenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
