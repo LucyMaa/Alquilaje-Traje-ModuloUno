@@ -8,7 +8,7 @@ import javax.swing.UIManager;
 
 /**
  *
- * @author aguil
+ * @author Liz
  */
 public class MenuPrincipal extends javax.swing.JFrame {
 
